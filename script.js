@@ -159,29 +159,29 @@ function checkCount(user, isUserSwitch){
     //var the_link = document.getElementById('user_'+name)
     //the_link.innerText = name+' (0)'
 
-    fetch('https://fluffyscratch.hampton.pw/notifications/v2/'+name+'?avoidcache='+Math.random())
+    fetch('https://api-9gr.vercel.app/scratch/messages/'+name+'?avoidcache='+Math.random())
     .then(response => response.json())
-    .then(data => {
+    .then(count => {
 
-      if(data.count == -1){
-        data.count = 0
+      if(count == -1){
+        count = 0
       }
 
       if(name == user){
         //they are selected user
 
 
-        if(data.count == -1){ //prevent -1
+        if(count == -1){ //prevent -1
           messages.innerHTML = 0
           document.title = 'notifier'
         } else {
-          messages.innerHTML = data.count
-          if(data.count == 0){
+          messages.innerHTML = count
+          if(count == 0){
             document.title = 'notifier'
           } else {
-            document.title = '('+data.count+') notifier'
+            document.title = '('+count+') notifier'
           }
-          favicon.badge(data.count);
+          favicon.badge(count);
         }
 
         //but still do the cool thing
@@ -189,12 +189,12 @@ function checkCount(user, isUserSwitch){
         if(data.count == -1){
           link.innerText = name + ' (0)'
         } else {
-          link.innerText = name + ' ('+data.count+')'
+          link.innerText = name + ' ('+count+')'
         }
         
 
         //add notifications later because they are a pain yay i did
-        if(oldMessageCounts[name] < data.count && !isUserSwitch){
+        if(oldMessageCounts[name] < count && !isUserSwitch){
           console.log('new mesage')
           var options = {
             body: 'click here to open the messages page!',
